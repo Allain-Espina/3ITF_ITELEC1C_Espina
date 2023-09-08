@@ -1,0 +1,64 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<EspinaITELEC1C.Models.InstructorModel>
+
+<h1>Instructor List</h1>
+
+<table class="table table-sm">
+    <tr>
+        <th>Instructor ID:</th>
+        <th></th>
+        <th>First Name:</th>
+        <th></th>
+        <th>Last Name:</th>
+        <th></th>
+        <th>Status:</th>
+        <th></th>
+        <th>Rank:</th>
+        <th></th>
+        <th>Date Hired:</th>
+        <th></th>
+        <th>Show Details:</th>
+    </tr>
+
+    @foreach (var instructor in Model)
+    {
+        <tr>
+            <td>@instructor.Id</td>
+            <td></td>
+            <td>@instructor.FirstName</td>
+            <td></td>
+            <td>@instructor.LastName</td>
+            <td></td>
+            <td>
+                @{
+                    var status = "";
+                    if (@instructor.IsTenured)
+                    {
+                        status = "Full-Time Employee";
+                    }
+                    else
+                    {
+                        status = "Part-Time Employee";
+                    }
+                }
+                @status
+            </td>
+            <td></td>
+            <td>@instructor.Rank</td>
+            <td></td>
+            <td>
+                @{
+                    var DateHired = @instructor.HiringDate;
+                    string HiringDate = String.Format("{0:dd/MM/yyyy}", DateHired);
+                }
+                @HiringDate
+            </td>
+            <td></td>
+            <td><a asp-action="ShowDetails" asp-route-id="@instructor.Id">Show Details</a></td>
+        </tr>
+    }
+</table>
