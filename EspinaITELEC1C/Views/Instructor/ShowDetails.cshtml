@@ -42,6 +42,12 @@
     </tr>
     <tr>
         <th>Date Hired</th>
-        <td>@Model.HiringDate</td>
+        <td>
+            @{
+                    var DateHired = @Model.HiringDate;
+                    string HiringDate = String.Format("{0:dd/MM/yyyy}", DateHired);
+                }
+                @HiringDate
+        </td>
     </tr>
 </table>
