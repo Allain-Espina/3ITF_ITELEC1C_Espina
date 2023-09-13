@@ -4,9 +4,11 @@
 @{
 }
 
-<h1>Student List</h1>
+@model IEnumerable<EspinaITELEC1C.Models.StudentModel>
 
-<table border="1px">
+@*<h1>Student List</h1>
+
+ <table border="1px">
     <tbody>
         <tr>
             <th>Student ID:</th>
@@ -40,4 +42,45 @@
             <td>@ViewBag.StudentEmail</td>
         </tr>
     </tbody>
+</table> *@
+
+<h1>Student List</h1>
+
+<table class="table table-hover table-sm">
+    <tr>
+        <th>Student ID:</th>
+        <th></th>
+        <th>Full Name:</th>
+        <th></th>
+        <th>Enrollment Date</th>
+        <th></th>
+        <th>Program</th>
+        <th></th>
+        <th>Email Address:</th>
+        <th></th>
+        <th>Show Details:</th>
+    </tr>
+
+    @foreach (var student in Model)
+    {
+        <tr>
+            <td>@student.StudentId</td>
+            <td></td>
+            <td>@student.StudentName</td>
+            <td></td>
+            <td>
+                @{
+                    var DateEnrolled = student.DateEnrolled;
+                    string EnrollmentDate = String.Format("{0:dd/MM/yyyy}", DateEnrolled);
+                }
+                @EnrollmentDate
+            </td>
+            <td></td>
+            <td>@student.StudentCourse</td>
+            <td></td>
+            <td>@student.StudentEmail</td>
+            <td></td>
+            <td><a class="btn btn-info" asp-action="StudentDetails" asp-route-id="@student.StudentId">Show Student Details</a></td>
+        </tr>
+    }
 </table>

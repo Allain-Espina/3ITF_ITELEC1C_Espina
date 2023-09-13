@@ -7,7 +7,7 @@
 
 <h1>Instructor List</h1>
 
-<table class="table table-sm">
+<table class="table table-hover table-sm">
     <tr>
         <th>Instructor ID:</th>
         <th></th>
@@ -58,7 +58,7 @@
                 @HiringDate
             </td>
             <td></td>
-            <td><a asp-action="ShowDetails" asp-route-id="@instructor.Id">Show Details</a></td>
+            <td><a class="btn btn-info" asp-action="ShowDetails" asp-route-id="@instructor.Id">Show Details</a></td>
         </tr>
     }
 </table>

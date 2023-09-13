@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model StudentModel;
+
+<h1>Student Details</h1>
+
+<table class="table table-hover">
+    <tr>
+        <th>Id</th>
+        <td>@Model.StudentId</td>
+    </tr>
+    <tr>
+        <th>Student Name</th>
+        <td>@Model.StudentName</td>
+    </tr>
+    <tr>
+        <th>Enrollment Date</th>
+        <td>
+            @{
+                var DateEnrolled = @Model.DateEnrolled;
+                string EnrollmentDate = String.Format("{0:dd/MM/yyyy}", DateEnrolled);
+            }
+            @EnrollmentDate
+        </td>
+    </tr>
+    <tr>
+        <th>Program</th>
+        <td>@Model.StudentCourse</td>
+    </tr>
+    <tr>
+        <th>Email Address</th>
+        <td>@Model.StudentEmail</td>
+    </tr>
+</table>

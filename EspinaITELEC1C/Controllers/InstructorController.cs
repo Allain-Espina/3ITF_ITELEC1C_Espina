@@ -49,12 +49,13 @@ namespace EspinaITELEC1C.Controllers
 
         public ActionResult ShowDetails(int id) 
         { 
+            //Search for the student that matches the given id
             InstructorModel? instructor = InstructorsList.FirstOrDefault(ins => ins.Id == id);
-           
+            //FirstOrDefault = Checks who is the first on the list
             if(instructor != null)
                 return View(instructor);
 
-            return View(); 
+            return NotFound(); 
         }
     }
 }
