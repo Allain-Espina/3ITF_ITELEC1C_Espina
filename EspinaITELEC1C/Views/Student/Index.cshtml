@@ -21,7 +21,13 @@
         <tr>
             <th>Date Enrolled:</th>
             <td></td>
-            <td>@ViewBag.DateEnrolled</td>
+            <td>
+                @{
+                    var DateEnrolled = @ViewBag.DateEnrolled;
+                    string EnrollmentDate = String.Format("{0:dd/MM/yyyy}", DateEnrolled);
+                }
+                @EnrollmentDate
+            </td>
         </tr>
         <tr>
             <th>Student Course:</th>
