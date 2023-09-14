@@ -55,7 +55,7 @@ namespace EspinaITELEC1C.Controllers
 
         }
 
-        public ActionResult StudentDetails(int id)
+        public IActionResult StudentDetails(int id)
         {
 
             StudentModel? student = StudentList.FirstOrDefault(st => st.StudentId == id);
@@ -64,6 +64,19 @@ namespace EspinaITELEC1C.Controllers
                 return View(student);
 
             return NotFound();
+        }
+
+        [HttpGet]
+        public IActionResult AddStudent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddStudent(StudentModel newStudent)
+        {
+            StudentList.Add(newStudent);
+            return View("Index", StudentList);
         }
 
     }

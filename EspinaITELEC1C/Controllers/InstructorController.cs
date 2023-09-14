@@ -57,5 +57,19 @@ namespace EspinaITELEC1C.Controllers
 
             return NotFound(); 
         }
+
+        [HttpGet]
+        public IActionResult AddInstructor()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddInstructor(InstructorModel newInstructor)
+        {
+            InstructorsList.Add(newInstructor);
+            return View("Index", InstructorsList);
+        }
+
     }
 }

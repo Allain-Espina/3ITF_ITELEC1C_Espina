@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model StudentModel;
+
+<h1>Create New Student Record</h1>
+
+<form asp-controller="Student" asp-action="AddStudent" method="post">
+    <div class="form-group">
+        <label asp-for="StudentId">Student ID Number</label>
+        @*<input type="text" class="form-control" id="Id" placeholder="Enter your Student ID" >*@
+        <input class="form-control" asp-for="StudentId">
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="StudentName">Student Name</label>
+        <input class="form-control" asp-for="StudentName">
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="StudentCourse">Course</label>
+        <select class="form-control" asp-for="StudentCourse" asp-items="@Html.GetEnumSelectList(typeof(Course))">
+            <option>BSIT</option>
+            <option>BSCS</option>
+            <option>BSIS</option>
+        </select>
+    </div>
+    <br />
+    @*<div class="form-group">
+    <label for="StudentEmail">Email Address</label>
+    <input type="email" class="form-control" id="StudentEmail" aria-describedby="emailHelp" >
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <br />*@
+    <div class="form-group">
+        <label asp-for="DateEnrolled">Enrollment Date</label>
+        <input class="form-control" asp-for="DateEnrolled">
+    </div>
+    <br />
+    @*<div class="form-group">
+    <label for="GPA">General Weighted Average</label>
+    <input type="text" class="form-control" id="GPA" >
+    </div>
+    <br />*@
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a class="btn btn-danger" asp-action="Index">Return</a>
+
+</form>
