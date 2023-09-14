@@ -30,7 +30,7 @@
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="IsTenured">Course</label>
+        <label asp-for="IsTenured">Status</label>
         <select class="form-control" asp-for="IsTenured">
             <option>Full-Time Employee</option>
             <option>Part-Time Employee</option>
@@ -44,7 +44,11 @@
         </select>
     </div>
     <br />
-
+    <div class="form-group">
+        <label asp-for="HiringDate">Date Hired</label>
+        <input class="form-control" asp-for="HiringDate">
+    </div>
+    <br />
     <button type="submit" class="btn btn-primary">Submit</button>
     <a class="btn btn-danger" asp-action="Index">Return</a>
 
