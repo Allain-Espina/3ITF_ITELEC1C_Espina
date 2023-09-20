@@ -11,7 +11,7 @@
 
 <table class="table table-hover table-sm">
     <tr>
-        <th>Instructor ID:</th>
+        <th hidden>Instructor ID:</th>
         <th></th>
         <th>First Name:</th>
         <th></th>
@@ -24,12 +24,14 @@
         <th>Date Hired:</th>
         <th></th>
         <th>Show Details:</th>
+        <th></th>
+        <th>Update:</th>
     </tr>
 
     @foreach (var instructor in Model)
     {
         <tr>
-            <td>@instructor.Id</td>
+            <td hidden>@instructor.Id</td>
             <td></td>
             <td>@instructor.FirstName</td>
             <td></td>
@@ -60,7 +62,10 @@
                 @HiringDate
             </td>
             <td></td>
-            <td><a tyle="color: white;" class="btn btn-info" asp-action="ShowDetails" asp-route-id="@instructor.Id">Show Details</a></td>
+            <td><a style="color: white;" class="btn btn-info" asp-action="ShowDetails" asp-route-id="@instructor.Id">Show Details</a></td>
+            <td></td>
+            <td><a style="color: white;" class="btn btn-info" asp-action="UpdateInstructor" asp-route-id="@instructor.Id">Update</a></td>
+
         </tr>
     }
 </table>

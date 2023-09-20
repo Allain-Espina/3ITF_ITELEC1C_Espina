@@ -11,12 +11,12 @@
 
 @model InstructorModel;
 
-<h1>Create New Student Record</h1>
+<h1>Update Instructor Record</h1>
 
-<form asp-controller="Instructor" asp-action="AddInstructor" method="post">
+<form asp-controller="Instructor" asp-action="UpdateInstructor" method="post">
     <div class="form-group">
-        <label asp-for="Id">Instructor ID</label>
-        <input class="form-control" asp-for="Id">
+        <label asp-for="Id" readonly>Instructor ID</label>
+        <input class="form-control" asp-for="Id" readonly>
     </div>
     <br />
     <div class="form-group">
@@ -33,10 +33,6 @@
         <label asp-for="IsTenured">Status</label>
         <br />
         Full-Time <input asp-for="IsTenured" />
-        @*<select class="form-control" asp-for="IsTenured">
-            <option value="true">Full-Time Employee</option>
-            <option value="false">Part-Time Employee</option>
-        </select>*@
     </div>
     <br />
 

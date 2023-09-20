@@ -13,7 +13,7 @@
         public DateTime DateEnrolled { get; set; }
         public Course StudentCourse { get; set; }
         public string StudentEmail { get; set; }
-        public float GeneralWeightedAverage { get; set; }
+        public double GeneralWeightedAverage { get; set; }
 
     }
 }

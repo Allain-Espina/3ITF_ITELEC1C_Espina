@@ -70,6 +70,34 @@ namespace EspinaITELEC1C.Controllers
             InstructorsList.Add(newInstructor);
             return View("Index", InstructorsList);
         }
+        
+        [HttpGet]
+        public IActionResult UpdateInstructor(int id)
+        {
+            InstructorModel? instructor = InstructorsList.FirstOrDefault(ins => ins.Id == id);
+
+            if (instructor != null)
+                return View(instructor);
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateInstructor(InstructorModel InstructorChanges)
+        {
+            InstructorModel? instructor = InstructorsList.FirstOrDefault(ins => ins.Id == InstructorChanges.Id);
+
+            if (InstructorChanges != null)
+            {
+                instructor.FirstName = InstructorChanges.FirstName;
+                instructor.LastName = InstructorChanges.LastName;
+                instructor.IsTenured = InstructorChanges.IsTenured;
+                instructor.Rank = InstructorChanges.Rank;
+                instructor.HiringDate = InstructorChanges.HiringDate;
+
+            }
+            return View("Index", InstructorsList);
+        }
 
     }
 }
