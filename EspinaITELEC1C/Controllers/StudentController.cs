@@ -107,5 +107,27 @@ namespace EspinaITELEC1C.Controllers
             return View("Index", StudentList);
         }
 
+        [HttpGet]
+        public IActionResult DeleteStudent(int id)
+        {
+            StudentModel? student = StudentList.FirstOrDefault(st => st.StudentId == id);
+
+            if (student != null)
+                return View(student);
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteStudent(StudentModel newStudent)
+        {
+            StudentModel? student = StudentList.FirstOrDefault(st => st.StudentId == newStudent.StudentId);
+
+            if (student != null)
+                StudentList.Remove(student);
+
+                return View("Index", StudentList);
+        }
+
     }
 }
