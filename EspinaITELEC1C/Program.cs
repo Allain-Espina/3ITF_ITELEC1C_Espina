@@ -1,7 +1,11 @@
+using EspinaITELEC1C.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSingleton<IDummyDataService, DummyDataService>();
+//Services cannot be added after the line 'var app = builder.Build'
 
 var app = builder.Build();
 

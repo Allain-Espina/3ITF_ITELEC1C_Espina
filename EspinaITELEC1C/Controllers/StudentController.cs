@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EspinaITELEC1C.Models;
+using EspinaITELEC1C.Services;
 
 namespace EspinaITELEC1C.Controllers
 {
     public class StudentController : Controller
     {
 
-        List<StudentModel> StudentList = new List<StudentModel>() {
+        /*List<StudentModel> StudentList = new List<StudentModel>() {
 
         new StudentModel
                 {
@@ -35,7 +36,14 @@ namespace EspinaITELEC1C.Controllers
                     StudentCourse = Course.BSIS,
                     StudentEmail = "sanoy.espina.cics@ust.edu.ph"
                 }
-        };
+        };*/
+
+        private readonly IDummyDataService _dummyData;
+
+        public StudentController(IDummyDataService dummyData) //Constructor
+        {
+            _dummyData = dummyData;
+        }
 
         public IActionResult Index()
         {
@@ -54,14 +62,14 @@ namespace EspinaITELEC1C.Controllers
             //ViewBag.StudentCourse = student.StudentCourse;
             //ViewBag.StudentEmail = student.StudentEmail;
 
-            return View(StudentList);
+            return View(_dummyData.StudentList);
 
         }
 
         public IActionResult StudentDetails(int id)
         {
 
-            StudentModel? student = StudentList.FirstOrDefault(st => st.StudentId == id);
+            StudentModel? student = _dummyData.StudentList.FirstOrDefault(st => st.StudentId == id);
 
             if (student != null)
                 return View(student);
@@ -78,13 +86,14 @@ namespace EspinaITELEC1C.Controllers
         [HttpPost]
         public IActionResult AddStudent(StudentModel newStudent)
         {
-            StudentList.Add(newStudent);
-            return View("Index", StudentList);
+            _dummyData.StudentList.Add(newStudent);
+            //return View("Index", _dummyData.StudentList);
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public IActionResult UpdateStudent(int id)
         {
-            StudentModel? student = StudentList.FirstOrDefault(st => st.StudentId == id);
+            StudentModel? student = _dummyData.StudentList.FirstOrDefault(st => st.StudentId == id);
 
             if (student != null)
                 return View(student);
@@ -94,7 +103,7 @@ namespace EspinaITELEC1C.Controllers
         [HttpPost]
         public IActionResult UpdateStudent(StudentModel StudentChanges)
         {
-            StudentModel? student = StudentList.FirstOrDefault(st => st.StudentId == StudentChanges.StudentId);
+            StudentModel? student = _dummyData.StudentList.FirstOrDefault(st => st.StudentId == StudentChanges.StudentId);
 
             if (StudentChanges != null)
             {
@@ -104,13 +113,13 @@ namespace EspinaITELEC1C.Controllers
                 student.StudentEmail = StudentChanges.StudentEmail;
 
             }
-            return View("Index", StudentList);
+            return View("Index", _dummyData.StudentList);
         }
 
         [HttpGet]
         public IActionResult DeleteStudent(int id)
         {
-            StudentModel? student = StudentList.FirstOrDefault(st => st.StudentId == id);
+            StudentModel? student = _dummyData.StudentList.FirstOrDefault(st => st.StudentId == id);
 
             if (student != null)
                 return View(student);
@@ -121,12 +130,12 @@ namespace EspinaITELEC1C.Controllers
         [HttpPost]
         public IActionResult DeleteStudent(StudentModel newStudent)
         {
-            StudentModel? student = StudentList.FirstOrDefault(st => st.StudentId == newStudent.StudentId);
+            StudentModel? student = _dummyData.StudentList.FirstOrDefault(st => st.StudentId == newStudent.StudentId);
 
             if (student != null)
-                StudentList.Remove(student);
+                _dummyData.StudentList.Remove(student);
 
-                return View("Index", StudentList);
+                return View("Index", _dummyData.StudentList);
         }
 
     }

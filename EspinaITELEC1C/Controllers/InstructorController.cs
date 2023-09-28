@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EspinaITELEC1C.Models;
 using System.ComponentModel;
+using EspinaITELEC1C.Services;
 
 namespace EspinaITELEC1C.Controllers
 {
     public class InstructorController : Controller
     {
-        List<InstructorModel> InstructorsList = new List<InstructorModel>() {
+        /*List<InstructorModel> InstructorsList = new List<InstructorModel>() {
                     new InstructorModel(){
                         Id = 1,
                         FirstName = "Allain",
@@ -41,16 +42,25 @@ namespace EspinaITELEC1C.Controllers
                         Rank = Ranks.Instructor,
                         HiringDate = DateTime.Parse("09/4/2023").Date
                       },
-                };
+                };*/
+
+        private readonly IDummyDataService _dummyData;
+
+        public InstructorController(IDummyDataService dummyData) //Constructor
+        {
+            _dummyData = dummyData;
+        }
+
         public IActionResult Index()
         {
-            return View(InstructorsList);
+            //return View(_dummyData.InstructorsList);
+            return View("Index", _dummyData.InstructorsList);
         }
 
         public ActionResult ShowDetails(int id) 
         { 
             //Search for the student that matches the given id
-            InstructorModel? instructor = InstructorsList.FirstOrDefault(ins => ins.Id == id);
+            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == id);
             //FirstOrDefault = Checks who is the first on the list
             if(instructor != null)
                 return View(instructor);
@@ -67,14 +77,14 @@ namespace EspinaITELEC1C.Controllers
         [HttpPost]
         public IActionResult AddInstructor(InstructorModel newInstructor)
         {
-            InstructorsList.Add(newInstructor);
-            return View("Index", InstructorsList);
+            _dummyData.InstructorsList.Add(newInstructor);
+            return View("Index", _dummyData.InstructorsList);
         }
         
         [HttpGet]
         public IActionResult UpdateInstructor(int id)
         {
-            InstructorModel? instructor = InstructorsList.FirstOrDefault(ins => ins.Id == id);
+            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == id);
 
             if (instructor != null)
                 return View(instructor);
@@ -85,7 +95,7 @@ namespace EspinaITELEC1C.Controllers
         [HttpPost]
         public IActionResult UpdateInstructor(InstructorModel InstructorChanges)
         {
-            InstructorModel? instructor = InstructorsList.FirstOrDefault(ins => ins.Id == InstructorChanges.Id);
+            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == InstructorChanges.Id);
 
             if (InstructorChanges != null)
             {
@@ -96,7 +106,29 @@ namespace EspinaITELEC1C.Controllers
                 instructor.HiringDate = InstructorChanges.HiringDate;
 
             }
-            return View("Index", InstructorsList);
+            return View("Index", _dummyData.InstructorsList);
+        }
+
+        [HttpGet]
+        public IActionResult DeleteInstructor(int id)
+        {
+            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == id);
+
+            if (instructor != null)
+                return View(instructor);
+
+            return NotFound();
+        }
+
+        [HttpPost]
+        public IActionResult DeleteInstructor(InstructorModel newInstructor)
+        {
+            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == newInstructor.Id);
+
+            if (instructor != null)
+                _dummyData.InstructorsList.Remove(instructor);
+
+            return View("Index", _dummyData.InstructorsList);
         }
 
     }

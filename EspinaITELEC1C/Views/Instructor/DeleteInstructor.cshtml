@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model InstructorModel;
+
+<h1>Delete Instructor Record</h1>
+<h2>Are you sure you want to delete this instructor's data?</h2>
+
+<form asp-controller="Instructor" asp-action="DeleteInstructor" method="post">
+    <div class="form-group">
+        <label asp-for="Id">Instructor ID</label>
+        <input class="form-control" asp-for="Id" readonly>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="FirstName">First Name</label>
+        <input class="form-control" asp-for="FirstName" readonly>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="LastName">Last Name</label>
+        <input class="form-control" asp-for="LastName" readonly>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="IsTenured">Status</label>
+        <br />
+        Full-Time <input asp-for="IsTenured" disabled/>
+    </div>
+    <br />
+
+    <div class="form-group">
+        <label asp-for="Rank">Rank</label>
+        <select class="form-control" asp-for="Rank" asp-items="@Html.GetEnumSelectList(typeof(Ranks))" disabled>
+        </select>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="HiringDate">Date Hired</label>
+        <input class="form-control" asp-for="HiringDate" readonly>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <button type="button" onclick="history.back()" class="btn btn-secondary">Cancel</button>
+
+</form>
