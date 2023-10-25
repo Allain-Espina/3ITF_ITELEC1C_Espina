@@ -1,4 +1,6 @@
-﻿namespace EspinaITELEC1C.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EspinaITELEC1C.Models
 {
     public enum Course
     {
@@ -7,7 +9,7 @@
 
     public class StudentModel
     {
-
+        [Key] 
         public int StudentId { get; set; }
         public string StudentName { get; set; }
         public DateTime DateEnrolled { get; set; }
