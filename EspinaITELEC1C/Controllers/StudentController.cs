@@ -100,6 +100,7 @@ namespace EspinaITELEC1C.Controllers
             //return View("Index", _dummyData.StudentList);
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public IActionResult UpdateStudent(int id)
         {
@@ -110,6 +111,7 @@ namespace EspinaITELEC1C.Controllers
 
             return NotFound();
         }
+
         [HttpPost]
         public IActionResult UpdateStudent(StudentModel StudentChanges)
         {
@@ -123,9 +125,9 @@ namespace EspinaITELEC1C.Controllers
                 student.StudentCourse = StudentChanges.StudentCourse;
                 student.StudentEmail = StudentChanges.StudentEmail;
                 _dbData.SaveChanges();
-
             }
             return View("Index", _dbData.Students);
+            //return RedirectToAction("Index");
         }
 
         [HttpGet]

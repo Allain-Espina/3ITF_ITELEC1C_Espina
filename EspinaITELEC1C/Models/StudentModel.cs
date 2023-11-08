@@ -9,13 +9,13 @@ namespace EspinaITELEC1C.Models
 
     public class StudentModel
     {
-        [Key] 
+        [Key]
         public int StudentId { get; set; }
-        public string StudentName { get; set; }
+        public string? StudentName { get; set; }
+        public double GeneralWeightedAverage { get; set; }
         public DateTime DateEnrolled { get; set; }
         public Course StudentCourse { get; set; }
-        public string StudentEmail { get; set; }
-        public double GeneralWeightedAverage { get; set; }
+        public string? StudentEmail { get; set; }
 
     }
 }

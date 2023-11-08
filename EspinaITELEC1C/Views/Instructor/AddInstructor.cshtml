@@ -13,12 +13,14 @@
 
 <h1>Create New Student Record</h1>
 
+<div class="btn-danger" asp-validation-summary="All"></div>
+
 <form asp-controller="Instructor" asp-action="AddInstructor" method="post">
-    <div class="form-group">
+    @* <div class="form-group">
         <label asp-for="Id">Instructor ID</label>
         <input class="form-control" asp-for="Id">
-    </div>
-    <br />
+    </div> 
+    <br />*@
     <div class="form-group">
         <label asp-for="FirstName">First Name</label>
         <input class="form-control" asp-for="FirstName">
@@ -49,6 +51,16 @@
     <div class="form-group">
         <label asp-for="HiringDate">Date Hired</label>
         <input class="form-control" asp-for="HiringDate">
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input class="form-control" asp-for="Email">
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Phone">Phone</label>
+        <input class="form-control" asp-for="Phone">
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Submit</button>

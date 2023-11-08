@@ -1,5 +1,5 @@
 using EspinaITELEC1C.Data;
-//using EspinaITELEC1C.Services;
+using EspinaITELEC1C.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,11 +21,13 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
 }
-app.UseStaticFiles();
 
 //Ensure that the database has been created
 var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<AppDbContext>();
 context.Database.EnsureCreated();
+/*context.Database.EnsureDeleted();
+*/
+app.UseStaticFiles();
 
 app.UseRouting();
 

@@ -2,6 +2,7 @@
 using EspinaITELEC1C.Models;
 using System.ComponentModel;
 using EspinaITELEC1C.Services;
+using EspinaITELEC1C.Data;
 
 namespace EspinaITELEC1C.Controllers
 {
@@ -44,23 +45,30 @@ namespace EspinaITELEC1C.Controllers
                       },
                 };*/
 
-        private readonly IDummyDataService _dummyData;
+        /*private readonly IDummyDataService _dummyData;
 
         public InstructorController(IDummyDataService dummyData) //Constructor
         {
             _dummyData = dummyData;
+        }*/
+
+        private readonly AppDbContext _dbData;
+
+        public InstructorController(AppDbContext dbData)
+        {
+            _dbData = dbData;
         }
 
         public IActionResult Index()
         {
             //return View(_dummyData.InstructorsList);
-            return View("Index", _dummyData.InstructorsList);
+            return View("Index", _dbData.Instructors);
         }
 
         public ActionResult ShowDetails(int id) 
         { 
             //Search for the student that matches the given id
-            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == id);
+            InstructorModel? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == id);
             //FirstOrDefault = Checks who is the first on the list
             if(instructor != null)
                 return View(instructor);
@@ -77,14 +85,18 @@ namespace EspinaITELEC1C.Controllers
         [HttpPost]
         public IActionResult AddInstructor(InstructorModel newInstructor)
         {
-            _dummyData.InstructorsList.Add(newInstructor);
-            return View("Index", _dummyData.InstructorsList);
+            if (!ModelState.IsValid)
+                return View();
+
+            _dbData.Instructors.Add(newInstructor);
+            _dbData.SaveChanges();
+            return View("Index", _dbData.Instructors);
         }
         
         [HttpGet]
         public IActionResult UpdateInstructor(int id)
         {
-            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == id);
+            InstructorModel? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == id);
 
             if (instructor != null)
                 return View(instructor);
@@ -95,7 +107,7 @@ namespace EspinaITELEC1C.Controllers
         [HttpPost]
         public IActionResult UpdateInstructor(InstructorModel InstructorChanges)
         {
-            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == InstructorChanges.Id);
+            InstructorModel? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == InstructorChanges.Id);
 
             if (InstructorChanges != null)
             {
@@ -104,15 +116,16 @@ namespace EspinaITELEC1C.Controllers
                 instructor.IsTenured = InstructorChanges.IsTenured;
                 instructor.Rank = InstructorChanges.Rank;
                 instructor.HiringDate = InstructorChanges.HiringDate;
+                _dbData.SaveChanges();
 
             }
-            return View("Index", _dummyData.InstructorsList);
+            return View("Index", _dbData.Instructors);
         }
 
         [HttpGet]
         public IActionResult DeleteInstructor(int id)
         {
-            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == id);
+            InstructorModel? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == id);
 
             if (instructor != null)
                 return View(instructor);
@@ -123,12 +136,14 @@ namespace EspinaITELEC1C.Controllers
         [HttpPost]
         public IActionResult DeleteInstructor(InstructorModel newInstructor)
         {
-            InstructorModel? instructor = _dummyData.InstructorsList.FirstOrDefault(ins => ins.Id == newInstructor.Id);
+            InstructorModel? instructor = _dbData.Instructors.FirstOrDefault(ins => ins.Id == newInstructor.Id);
 
             if (instructor != null)
-                _dummyData.InstructorsList.Remove(instructor);
+                _dbData.Instructors.Remove(instructor);
+                _dbData.SaveChanges();
 
-            return View("Index", _dummyData.InstructorsList);
+
+            return View("Index", _dbData.Instructors);
         }
 
     }
