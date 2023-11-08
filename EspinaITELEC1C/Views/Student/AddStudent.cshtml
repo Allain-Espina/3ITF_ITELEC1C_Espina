@@ -8,29 +8,31 @@
 
 <h1>Create New Student Record</h1>
 
+<div class="btn-danger" asp-validation-summary="All"></div>
+
 <form asp-controller="Student" asp-action="AddStudent" method="post">
-    <div class="form-group">
-        <label asp-for="StudentId">Student ID Number</label>
+    @* <div class="form-group">
+        <label asp-for="StudentId"></label>
         <input class="form-control" asp-for="StudentId">
     </div>
-    <br />
+    <br /> *@
     <div class="form-group">
-        <label asp-for="StudentName">Student Name</label>
+        <label asp-for="StudentName"></label>
         <input class="form-control" asp-for="StudentName">
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="GeneralWeightedAverage">GPA</label>
+        <label asp-for="GeneralWeightedAverage"></label>
         <input class="form-control" asp-for="GeneralWeightedAverage">
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="DateEnrolled">Enrollment Date</label>
+        <label asp-for="DateEnrolled"></label>
         <input class="form-control" asp-for="DateEnrolled">
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="StudentCourse">Course</label>
+        <label asp-for="StudentCourse"></label>
         <select class="form-control" asp-for="StudentCourse" asp-items="@Html.GetEnumSelectList(typeof(Course))">
             @*<option>BSIT</option>
             <option>BSCS</option>
@@ -39,7 +41,7 @@
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="StudentEmail">Email Address</label>
+        <label asp-for="StudentEmail"></label>
         <input class="form-control" asp-for="StudentEmail">
     </div>
     <br />

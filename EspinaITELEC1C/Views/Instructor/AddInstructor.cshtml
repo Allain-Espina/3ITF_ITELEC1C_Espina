@@ -3,15 +3,10 @@
 *@
 @{
 }
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
 
 @model InstructorModel;
 
-<h1>Create New Student Record</h1>
+<h1>Create New Instructor Record</h1>
 
 <div class="btn-danger" asp-validation-summary="All"></div>
 
@@ -22,17 +17,17 @@
     </div> 
     <br />*@
     <div class="form-group">
-        <label asp-for="FirstName">First Name</label>
+        <label asp-for="FirstName"></label>
         <input class="form-control" asp-for="FirstName">
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="LastName">Last Name</label>
+        <label asp-for="LastName"></label>
         <input class="form-control" asp-for="LastName">
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="IsTenured">Status</label>
+        <label asp-for="IsTenured"></label>
         <br />
         Full-Time <input asp-for="IsTenured" />
         @*<select class="form-control" asp-for="IsTenured">
@@ -43,23 +38,23 @@
     <br />
 
     <div class="form-group">
-        <label asp-for="Rank">Rank</label>
+        <label asp-for="Rank"></label>
         <select class="form-control" asp-for="Rank" asp-items="@Html.GetEnumSelectList(typeof(Ranks))">
         </select>
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="HiringDate">Date Hired</label>
+        <label asp-for="HiringDate"></label>
         <input class="form-control" asp-for="HiringDate">
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="Email">Email</label>
+        <label asp-for="Email"></label>
         <input class="form-control" asp-for="Email">
     </div>
     <br />
     <div class="form-group">
-        <label asp-for="Phone">Phone</label>
+        <label asp-for="Phone"></label>
         <input class="form-control" asp-for="Phone">
     </div>
     <br />

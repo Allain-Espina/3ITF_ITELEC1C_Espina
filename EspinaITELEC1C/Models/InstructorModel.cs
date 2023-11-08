@@ -19,17 +19,16 @@ namespace EspinaITELEC1C.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "State your Status")]
         [Display(Name = "Instructor Status")]
         public Boolean IsTenured { get; set; }
 
-        [Required(ErrorMessage = "State your Rank")]
+        [Required(ErrorMessage = "State your Position")]
         [Display(Name = "Instructor Position")]
         public Ranks Rank { get; set; }
 
-        [Required(ErrorMessage = "Please provide your hiring date")]
         [DataType(DataType.Date)]
         [Display(Name = "Date Hired")]
+        [Required(ErrorMessage = "Please provide your hiring date")]
         public DateTime HiringDate { get; set; }
 
         [Required(ErrorMessage = "Type in your Email Address")]

@@ -71,7 +71,7 @@ namespace EspinaITELEC1C.Controllers
             //ViewBag.StudentCourse = student.StudentCourse;
             //ViewBag.StudentEmail = student.StudentEmail;
 
-            return View(_dbData.Students);
+            return View("Index", _dbData.Students);
 
         }
 
@@ -95,10 +95,13 @@ namespace EspinaITELEC1C.Controllers
         [HttpPost]
         public IActionResult AddStudent(StudentModel newStudent)
         {
+            if (!ModelState.IsValid)
+                return View();
+
             _dbData.Students.Add(newStudent);
             _dbData.SaveChanges();
             //return View("Index", _dummyData.StudentList);
-            return RedirectToAction("Index");
+            return View("Index", _dbData.Students);
         }
 
         [HttpGet]
